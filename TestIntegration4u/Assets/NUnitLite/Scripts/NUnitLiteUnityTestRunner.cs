@@ -30,7 +30,7 @@ namespace NUnitLite.Unity
 			RunWithNUnitStreamUI(Assembly.GetCallingAssembly());
 		}
 
-		public void RunWithNUnitStreamUI(Assembly assembly)
+		private void RunWithNUnitStreamUI(Assembly assembly)
 		{
 			if (assembly == null)
 			{
@@ -53,13 +53,44 @@ namespace NUnitLite.Unity
 				}
 			}
 		}
+		
+		//Run tests from category by Joseph
+		public void RunWithNUnitStreamUI(String category)
+		{
+			if (category == null)
+			{
+				throw new ArgumentNullException("category was null.");
+			}
+			RunWithNUnitStreamUI(Assembly.GetCallingAssembly(), category);
+		}
+		
+		private void RunWithNUnitStreamUI(Assembly assembly, String category)
+		{
+			//Debug.Log("category = " + category);
+			using (var sw = new StringWriter())
+			{
+				NUnitStreamUI runner = new NUnitStreamUI(sw);
+				runner.Execute(assembly, category);
+				ResultSummary resultSummary = runner.Summary;
+				string resultText = sw.GetStringBuilder().ToString();
+				if (resultSummary.ErrorCount > 0 || resultSummary.FailureCount > 0)
+				{
+					Debug.LogWarning(resultText);
+				}
+				else
+				{
+					Debug.Log(resultText);
+				}
+			}
+		}
+		//End run tests from category by Joseph
 
 		public void RunWithTextUI()
 		{
 			RunWithTextUI(Assembly.GetCallingAssembly());
 		}
 
-		public void RunWithTextUI(Assembly assembly)
+		private void RunWithTextUI(Assembly assembly)
 		{
 			RunWithTextUI(Assembly.GetCallingAssembly(), GetDefaultReportFileName());
 		}

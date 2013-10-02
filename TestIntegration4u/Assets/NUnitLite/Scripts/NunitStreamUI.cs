@@ -29,6 +29,7 @@ using System.IO;
 using System.Reflection;
 using NUnit.Framework.Api;
 using NUnit.Framework.Internal;
+using NUnit.Framework.Internal.Filters;
 
 namespace NUnitLite.Runner
 {
@@ -108,12 +109,58 @@ namespace NUnitLite.Runner
             }
 
         }
+		
+		//Unit testing by category added by Joseph
+		public void Execute(Assembly assembly, String category)
+        {
+            try
+            {
+                IDictionary loadOptions = new Hashtable();
+				
+				if (!runner.Load(assembly, loadOptions))
+                {
+                    writer.WriteLine("No tests found in assembly {0}", assembly.GetName().Name);
+                    return;
+                }
+				
+				//create test filter for CategoryAttribute, based on /include flag
+				ITestFilter filter = TestFilter.Empty;
+				TestFilter includeFilter = new SimpleCategoryExpression(category).Filter;
+				filter = includeFilter;
+				
+                
+                writer.Write(assembly.GetName().Name + ": ");
+                RunTests(filter);
+            }
+#pragma warning disable 168
+            catch (NullReferenceException ex)
+#pragma warning restore 168
+            {
+            }
+            catch (Exception ex)
+            {
+                writer.WriteLine(ex.Message);
+            }
+            finally
+            {
+                writer.Close();
+            }
+
+        }
+		//End unit testing by category added by Joseph
 
         private void RunTests()
         {
             ITestResult result = runner.Run(TestListener.NULL, TestFilter.Empty);
             ReportResults(result);
         }
+		
+		private void RunTests(ITestFilter filter)
+        {
+            ITestResult result = runner.Run(TestListener.NULL, filter);
+            ReportResults(result);
+        }
+
 
         /// <summary>
         /// Reports the results.

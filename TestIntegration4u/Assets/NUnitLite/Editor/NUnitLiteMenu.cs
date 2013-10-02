@@ -26,6 +26,15 @@ namespace NUnitLite.Unity
 			Debug.Log("Running unit test.");
 			new TestDriverSimple();
 		}
+		
+		[MenuItem("NUnitLite/Run Category Unit Tests #&t")]
+		public static void RunTestsWithConsoleViewCategory()
+		{
+			ClearConsole();
+			String category = "Cat2";
+			Debug.Log("Running category unit test for: " + category);
+			new TestDriverCategory(category);
+		}
 
 		[MenuItem("NUnitLite/Run Unit Tests (with report NUnit2 format.")]
 		public static void RunTestsWithNUnit2Report()
@@ -33,12 +42,12 @@ namespace NUnitLite.Unity
 			new TestDriverNUnit2Report();
 		}
 
-		[MenuItem("NUnitLite/Run Unit Tests (with report NUnit3 format.")]
+		/*[MenuItem("NUnitLite/Run Unit Tests (with report NUnit3 format.")]
 		public static void RunTestsWithNUnit3Report()
 		{
 			Debug.ClearDeveloperConsole();
 
-		}
+		}*/
 
 		#endregion
 	

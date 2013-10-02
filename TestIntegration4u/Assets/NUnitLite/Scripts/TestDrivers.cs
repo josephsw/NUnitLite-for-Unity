@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace NUnitLite.Unity
 {
@@ -8,6 +9,15 @@ namespace NUnitLite.Unity
 		public TestDriverSimple()
 		{
 			new NUnitLiteUnityTestRunner().RunWithNUnitStreamUI();
+		}
+	}
+	
+	[TestDriver]
+	public class TestDriverCategory
+	{
+		public TestDriverCategory(String category)
+		{
+			new NUnitLiteUnityTestRunner().RunWithNUnitStreamUI(category);
 		}
 	}
 

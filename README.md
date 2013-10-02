@@ -5,7 +5,7 @@ Forked from TestIntegration4u by uzzu, which was based on nunit-unity3d by Andre
 Added categories support, updated NUnitLite dll to v1.0.
 
 Quick guide:
-Change the 'category' string in NUnitLiteMenu.cs to choose a category. Category should be specified in your test by [Category("category")] (see ExampleTest2.cs)
+Change the 'category' string in NUnitLiteMenu.cs to choose a category. Category should be specified in your test by \[Category("category")\] (see ExampleTest2.cs)
 
 # Contains
 

@@ -1,6 +1,6 @@
-NUnitLite Test Integration for Unity
+NUnitLite 1.0 Test Integration for Unity 4.x
 ====
-Forked from TestIntegration4u by uzzu. 
+Forked from TestIntegration4u by uzzu, which was based on nunit-unity3d by Andrew Zhilin (zoon).
 
 Added categories support, updated NUnitLite dll to v1.0.
 
@@ -18,3 +18,5 @@ Change the 'category' string in NUnitLiteMenu.cs to choose a category. Category 
 NUnitLite for Unity is released under the MIT Licence.
 
 NB: Project not affiliated with NUnitLite in any way.
+
+Copyright (C) 2013 by Joseph Wang (josephsw)

@@ -29,4 +29,13 @@ namespace NUnitLite.Unity
 			new NUnitLiteUnityTestRunner().RunWithTextUI();
 		}
 	}
+	
+	[TestDriver]
+	public class TestDriverCategoryNUnit2Report
+	{
+		public TestDriverCategoryNUnit2Report(String reportFileName, String category)
+		{
+			new NUnitLiteUnityTestRunner().RunWithTextUI(reportFileName, category);
+		}
+	}
 }

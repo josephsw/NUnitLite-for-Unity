@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 [TestFixture]
 [Category("ObjectTest")]
-public class ExampleTest3
+public class ObjectTest
 {
     [Test]
     public void CanCombineTestsWithAndOperator()

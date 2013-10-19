@@ -41,6 +41,14 @@ namespace NUnitLite.Unity
 		{
 			new TestDriverNUnit2Report();
 		}
+		
+		[MenuItem("NUnitLite/Run Category Unit Tests (with report NUnit2 format.")]
+		public static void RunCategoryTestsWithNUnit2Report()
+		{
+			String category = "Cat2";
+			Debug.Log("Running category NUnit2 test for: " + category);
+			new TestDriverCategoryNUnit2Report(null, category);
+		}
 
 		/*[MenuItem("NUnitLite/Run Unit Tests (with report NUnit3 format.")]
 		public static void RunTestsWithNUnit3Report()

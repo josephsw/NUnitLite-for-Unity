@@ -100,13 +100,13 @@ namespace NUnitLite.Unity
 			RunWithTextUI(Assembly.GetCallingAssembly(), reportFileName);
 		}
 
-		public void RunWithTextUI(Assembly assembly, string reportFileName, TextUIOptionBuilder.XmlReportFormat format = TextUIOptionBuilder.XmlReportFormat.NUnit2)
+		private void RunWithTextUI(Assembly assembly, string reportFileName, TextUIOptionBuilder.XmlReportFormat format = TextUIOptionBuilder.XmlReportFormat.NUnit2)
 		{
 			if (assembly == null)
 			{
 				throw new ArgumentNullException("assembly was null.");
 			}
-
+			
 			using (var sw = new StringWriter())
 			{
 				TextUI runner = new TextUI(sw);
@@ -119,6 +119,37 @@ namespace NUnitLite.Unity
 				Debug.Log(sw.GetStringBuilder().ToString());
 			}
 		}
+		
+		//Run tests from category by Joseph
+		public void RunWithTextUI(string reportFileName, string category)
+		{
+			if (reportFileName == null)
+			{
+				reportFileName = GetDefaultReportFileName();
+			}
+			if (category == null)
+			{
+				throw new ArgumentNullException("category was null.");
+			}
+			RunWithTextUI(Assembly.GetCallingAssembly(), reportFileName, category);
+		}
+		
+		public void RunWithTextUI(Assembly assembly, string reportFileName, string category, TextUIOptionBuilder.XmlReportFormat format = TextUIOptionBuilder.XmlReportFormat.NUnit2)
+		{
+			using (var sw = new StringWriter())
+			{
+				TextUI runner = new TextUI(sw);
+				TextUIOptionBuilder builder = new TextUIOptionBuilder();
+				builder.AddAssembleFileName(assembly.FullName)
+					.SetReportFileName(reportFileName)
+					.SetReportFormat(format)
+					.SetIncludeCategory (category);
+				string[] option = builder.Build();
+				runner.Execute(option);
+				Debug.Log(sw.GetStringBuilder().ToString());
+			}
+		}
+		//End run tests from category by Joseph
 		#endregion
 
 		#region override unity methods
